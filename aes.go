@@ -10,8 +10,7 @@ import (
 )
 
 // func Encrypt() encrypts the message given a default 32-byte basekey and some salt value.
-func Encrypt(basekey, salt, message string) (encmess string, err error) {
-	key := saltKey(basekey, salt)
+func Encrypt(key, message string) (encmess string, err error) {
 	plainText := []byte(message)
 
 	block, err := aes.NewCipher([]byte(key))
@@ -36,13 +35,12 @@ func Encrypt(basekey, salt, message string) (encmess string, err error) {
 }
 
 // func Decrypt() decrypts the message given a default 32-byte basekey and some salt value.
-func Decrypt(basekey, salt, securemess string) (decodedmess string, err error) {
+func Decrypt(key, securemess string) (decodedmess string, err error) {
 	cipherText, err := base64.URLEncoding.DecodeString(securemess)
 	if err != nil {
 		return
 	}
 
-	key := saltKey(basekey, salt)
 	block, err := aes.NewCipher([]byte(key))
 	if err != nil {
 		return
@@ -64,14 +62,4 @@ func Decrypt(basekey, salt, securemess string) (decodedmess string, err error) {
 
 	decodedmess = string(cipherText)
 	return
-}
-
-func saltKey(key, salt string) string {
-	if len(key) != 32 {
-		panic("AES encryption requires 32-byte key")
-	}
-	if len(salt) >= 32 {
-		return salt[:32]
-	}
-	return salt + key[len(salt):]
 }
