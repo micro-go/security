@@ -1,6 +1,8 @@
 # security
 Security-related utilities.
 
-### Acknowledgments
+DO NOT USE THIS PACKAGE. Seriously. What little is here is just pulled from other, more complete, more sophisticated places.
 
-This is was just pulled from https://gist.github.com/mickelsonm/e1bf365a149f3fe59119
+More specifically:
+https://gist.github.com/mickelsonm/e1bf365a149f3fe59119
+https://github.com/apexskier/cryptoPadding
